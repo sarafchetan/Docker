@@ -5,27 +5,10 @@ pipeline {
         }
     }
     stages { 	
-        stage('Build Jar') {
+        stage('Build test') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                echo 'Hello world'
             }
         }
-        stage('Build Image') {
-            steps {
-                script {
-                	app = docker.build("vinsdocker/containertest")
-                }
-            }
-        }
-        stage('Push Image') {
-            steps {
-                script {
-			        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-			        	app.push("${BUILD_NUMBER}")
-			            app.push("latest")
-			        }
-                }
-            }
-        }        
-    }
+        
 }
