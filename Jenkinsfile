@@ -1,14 +1,8 @@
-pipeline {
-    agent {
+agent {
+    stage("One"){
         node {
-            label 'docker' && 'maven'
+            sleep 10
+            echo 'Hello'
         }
     }
-    stages { 	
-        stage('Build test') {
-            steps {
-                echo 'Hello world'
-            }
-        }
-    } 
 }
