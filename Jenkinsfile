@@ -1,8 +1,10 @@
-agent {
-    stage("One"){
-        node {
-            sleep 10
-            echo 'Hello'
+pipeline {
+    agent any 
+    stages {
+        stage('Stage 1') {
+            steps {
+                echo 'Hello world!' 
+            }
         }
     }
 }
