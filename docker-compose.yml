@@ -3,14 +3,14 @@ version: '3.3'
 services:
 
   hub:
-    image: selenium/hub:3.141.59
+    image: selenium/hub:latest
     volumes:
       - ./web/application:/application
     ports:
       - 4444:4444
 
   chrome:
-    image: selenium/node-chrome:3.141.59
+    image: selenium/node-chrome:latest
     depends_on:
       - hub
     environment:
