@@ -13,7 +13,7 @@ pipeline {
         stage('Spinning up docker images') {
             steps {
                 	echo "PATH is: $PATH"
-                    sh '/usr/local/bin/docker-compose up -d'
+                    sh 'sudo /usr/local/bin/docker-compose up -d'
                 
                 }
             }
