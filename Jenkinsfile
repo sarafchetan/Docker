@@ -20,11 +20,11 @@ pipeline {
       stage('Run Test') {
          steps{
             parallel(
-               "search-module":{
+               "suite":{
                   // a directory 'search' is created for container test-output
-                  sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=firefox -e MODULE=search-module.xml -v ${WORKSPACE}/search:/usr/share/tag/test-output --network ${network} 130619852016/containertest"
+                 sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=testng.xml -v ${WORKSPACE}/order:/usr/share/tag/test-output  --network ${network} vinsdocker/containertest"
                   //archive all the files under 'search' directory
-                  archiveArtifacts artifacts: 'search/**', fingerprint: true
+                  archiveArtifacts artifacts: 'suite/**', fingerprint: true
                }      
             ) 
          }
