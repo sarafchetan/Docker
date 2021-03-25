@@ -1,37 +1,33 @@
 pipeline {
-    environment{
-    PATH = "$PATH:/usr/local/bin"
-    }
-    agent any 
-    stages { 	
-        stage('pull latest code') {
-            steps {
-            	//Get some code from git repository
-                sh  'git clone https://github.com/sarafchetan/Docker.git'
-            }
-        }
-        stage('Spinning up docker images') {
-            steps {
-                	echo "PATH is: $PATH"
-                    sh '/usr/local/bin/docker-compose up -d'
-                
+    agent none
+    stages {    
+        stage('Build Jar') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
                 }
             }
-        stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Build Image') {
+            steps {
+                script {
+                       app = docker.build("130619852016/containertest")
                 }
             }
-         stage('Test'){
-           	 steps(){
-           	 	sh 'mvn test'
-           	 } 
-           }
-          stage('Destroy - After running test container'){
-             steps(){
-             	sh 'docker stop $(docker ps -a -q)'
-          		sh 'docker rm $(docker ps -a -q)'
-             }
-           }
+        }
+        stage('Push Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        app.push("${BUILD_NUMBER}")
+                        app.push("latest")
+                    }
+                }
+            }
         }        
+    }
 }
