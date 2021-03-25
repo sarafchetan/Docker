@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 //variables
 def network='jenkins-${BUILD_NUMBER}'
 def seleniumHub='selenium-hub-${BUILD_NUMBER}'
