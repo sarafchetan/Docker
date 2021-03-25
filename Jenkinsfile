@@ -4,7 +4,7 @@ pipeline {
         stage('pull latest code') {
             steps {
             	//Get some code from git repository
-               git 'https://github.com/sarafchetan/Docker.git'
+               git clone 'https://github.com/sarafchetan/Docker.git'
             }
         }
         stage('Spinning up docker images') {
