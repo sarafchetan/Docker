@@ -1,4 +1,7 @@
 pipeline {
+    environment{
+    PATH = "$PATH:/usr/local/bin"
+    }
     agent any 
     stages { 	
         stage('pull latest code') {
@@ -9,7 +12,8 @@ pipeline {
         }
         stage('Spinning up docker images') {
             steps {
-                	sh 'docker-compose up -d'
+                	echo "PATH is: $PATH"
+                    sh '/usr/local/bin/docker-compose up -d'
                 
                 }
             }
