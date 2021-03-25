@@ -4,7 +4,7 @@ pipeline {
         stage('pull latest code') {
             steps {
             	//Get some code from git repository
-              git branch: 'main', credentialsId: 'a90102e0-14b1-48d3-af9a-be80de94013a', url: 'https://github.com/sarafchetan/Docker.git'
+              git  url: 'https://github.com/sarafchetan/Docker.git'
             }
         }
         stage('Spinning up docker images') {
