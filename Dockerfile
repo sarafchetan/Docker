@@ -17,7 +17,7 @@ ADD suite/testng.xml testng.xml
 # MODULE  = testng
 # SELENIUM_HUB = selenium hub hostname / ipaddress
 
-#ENTRYPOINT java -cp container-test.jar;libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG $MODULE
+ENTRYPOINT java -cp container-test.jar;libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG $MODULE
 
 
 
