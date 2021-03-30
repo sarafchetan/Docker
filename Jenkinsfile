@@ -13,7 +13,8 @@ pipeline {
       }
       stage('Spinning up docker images') {
          steps{
-            sh 'docker-compose up -d'
+            	 sh 'cd /var/lib/jenkins/workspace/Pipeline'
+		 sh 'docker-compose up -d'
          }
       }
       stage('Build') {
