@@ -23,7 +23,7 @@ pipeline {
             parallel(
                "suite":{
                   // a directory 'search' is created for container test-output
-                 sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=testng.xml -v ${WORKSPACE}/suite:/usr/share/tag/test-output  --network ${network} 130619852016/containertest:latest"
+                 sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=testng.xml -v ${WORKSPACE}/suite:/usr/share/tag/test-output  --network ${network} registry.hub.docker.com/130619852016/containertest"
                   //archive all the files under 'search' directory
                   archiveArtifacts artifacts: 'Suite/**', fingerprint: true
                }      
