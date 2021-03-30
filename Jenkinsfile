@@ -8,7 +8,7 @@ pipeline {
    stages{
       stage('pull latest code') {
          steps{        
-           git 'https://github.com/sarafchetan/Docker.git'
+          sh  'git https://github.com/sarafchetan/Docker.git'
            }
       }
       stage('Spinning up docker images') {
