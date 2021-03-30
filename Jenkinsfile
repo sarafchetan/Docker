@@ -21,7 +21,7 @@ pipeline {
             sh 'mvn clean package -DskipTests'
           }
         } 
-	  stages('Destroy - after docker tests on container'){
+	  stage('Destroy - after docker tests on container'){
 		  steps{
 			sh 'docker stop $(docker ps -a -q)'
 			sh 'docker rm $(docker ps -a -q)'
