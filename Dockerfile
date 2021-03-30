@@ -4,11 +4,11 @@ FROM openjdk:8-jre-slim
 WORKDIR /usr/share/tag
 
 # Add the project jar & copy dependencies
-ADD  target/container-test.jar container-test.jar
-ADD  target/libs libs
+#ADD  target/container-test.jar container-test.jar
+#ADD  target/libs libs
 
 # Add the suite xmls
-ADD suite/testng.xml testng.xml
+#ADD suite/testng.xml testng.xml
 
 
 # Command line to execute the test
@@ -17,5 +17,7 @@ ADD suite/testng.xml testng.xml
 # MODULE  = testng
 # SELENIUM_HUB = selenium hub hostname / ipaddress
 
-ENTRYPOINT java -cp container-test.jar;libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG $MODULE
+#ENTRYPOINT java -cp container-test.jar;libs/* -DseleniumHubHost=$SELENIUM_HUB -Dbrowser=$BROWSER org.testng.TestNG $MODULE
+
+
 
