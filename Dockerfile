@@ -8,7 +8,7 @@ ADD  target/container-test.jar container-test.jar
 ADD  target/libs libs
 
 # Add the suite xmls
-#ADD suite/testng.xml testng.xml
+ADD suite/testng.xml testng.xml
 
 
 # Command line to execute the test
