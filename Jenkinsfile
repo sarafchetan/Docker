@@ -10,7 +10,7 @@ pipeline {
    stages{
       stage('pull latest code') {
          steps{        
-           git 'https://github.com/sarafchetan/Docker.git'
+           git branch: 'main', url: 'https://github.com/sarafchetan/Docker.git'
            }
       }
       stage('Spinning up docker images') {
