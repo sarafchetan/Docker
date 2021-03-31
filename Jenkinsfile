@@ -4,7 +4,7 @@
 pipeline {
    environment {
     PATH = "$PATH:/usr/local/bin"
-    /*def mvnHome = tool name: 'Maven 3.3.1', type: 'maven'*/
+    def mvnHome = tool name: 'Maven 3.6.3', type: 'maven'
   }
    agent any
    stages{
@@ -24,7 +24,7 @@ pipeline {
       stage('Build') {
 	      steps{
 		 
-		  sh 'mvn clean package -DskipTests'
+		  sh '${mvnHome}/bin/mvn -version'
 	      }
           	 
         } 
