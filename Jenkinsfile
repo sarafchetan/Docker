@@ -7,7 +7,7 @@ pipeline {
   }
    agent any
 	tools {
-        maven 'apache-maven-3.0.1' 
+        maven 'apache-maven-2.2.1' 
     }
    stages{
       stage('pull latest code') {
