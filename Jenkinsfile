@@ -3,7 +3,7 @@
    
 pipeline {
    environment {
-    PATH = "$PATH:/usr/bin"
+    PATH = "$PATH:/usr/local/bin"
   }
    agent any
 
@@ -17,7 +17,7 @@ pipeline {
          steps{
 			
 		 	echo "PATH is: $PATH"
-			sh  "docker-compose up -d"
+			sh  "/usr/local/bin/docker-compose up -d"
          }
       }
       stage('Build') {
