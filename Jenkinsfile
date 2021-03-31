@@ -17,7 +17,7 @@ pipeline {
          steps{
 			
 		 	echo "PATH is: $PATH"
-			sh  "/var/lib/jenkins/workspace/Pipeline/docker-compose up -d"
+			sh  "docker-compose up -d"
          }
       }
       stage('Build') {
