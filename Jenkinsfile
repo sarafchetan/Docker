@@ -6,12 +6,10 @@ pipeline {
     PATH = "$PATH:/usr/local/bin"
   }
    agent any
-	tools {
-        maven 'apache-maven-2.2.1' 
-    }
    stages{
       stage('pull latest code') {
-         steps{        
+         steps{      
+		
            git branch: 'main', url: 'https://github.com/sarafchetan/Docker.git'
            }
       }
@@ -24,8 +22,8 @@ pipeline {
       }
       stage('Build') {
           steps {
-          	  sh 'mvn --version'
-		  sh 'mvn clean package -DskipTests'
+          	  def mvnHome= tool name: 'Maven 2.2.1', type: 'maven'
+		  sh "${mvnHome}/bin/mvn package -DskipTests"
           }
         } 
 	  stage('Destroy - after docker tests on container'){
