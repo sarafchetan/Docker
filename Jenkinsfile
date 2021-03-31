@@ -21,8 +21,11 @@ pipeline {
          }
       }
       stage('Build') {
-          	  def mvnHome = tool name: 'Maven 2.2.1', type: 'maven'
-		  sh "${mvnHome}/bin/mvn package "
+	      steps{
+		  def mvnHome = tool name: 'Maven 2.2.1', type: 'maven'
+		  sh "${mvnHome}/bin/mvn package"
+	      }
+          	 
         } 
 	  stage('Destroy - after docker tests on container'){
 		  steps{
