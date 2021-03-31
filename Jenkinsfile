@@ -6,7 +6,10 @@ pipeline {
     PATH = "$PATH:/usr/local/bin"
   }
    agent any
-
+	tools {
+    	maven 'M3'
+	jdk 'jdk8'
+  }
    stages{
       stage('pull latest code') {
          steps{        
@@ -22,6 +25,8 @@ pipeline {
       }
       stage('Build') {
           steps {
+		echo "PATH = ${PATH}"
+                echo "M2_HOME = ${M2_HOME}"
             sh 'mvn clean package -DskipTests'
           }
         } 
