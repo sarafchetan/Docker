@@ -4,7 +4,7 @@
 pipeline {
    environment {
     PATH = "$PATH:/usr/local/bin"
-    def mvnHome = tool name: 'Maven 2.2.1', type: 'maven'
+    def mvnHome = tool name: 'Maven 3.0', type: 'maven'
   }
    agent any
    stages{
