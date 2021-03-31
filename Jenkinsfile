@@ -6,7 +6,9 @@ pipeline {
     PATH = "$PATH:/usr/local/bin"
   }
    agent any
-	
+	tools {
+        maven 'apache-maven-3.0.1' 
+    }
    stages{
       stage('pull latest code') {
          steps{        
@@ -22,7 +24,8 @@ pipeline {
       }
       stage('Build') {
           steps {
-            sh 'mvn clean package -DskipTests'
+          	  sh 'mvn --version'
+		  sh 'mvn clean package -DskipTests'
           }
         } 
 	  stage('Destroy - after docker tests on container'){
