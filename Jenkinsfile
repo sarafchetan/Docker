@@ -9,16 +9,44 @@ def containertest='conatinertest-${BUILD_NUMBER}'
 pipeline {
   
    agent any
-
    stages{
-      stage('Setting Up Selenium Grid') {
+	stage('Build Jar') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }	
+		}
+	stage('Build Image') {
+            steps {
+                script {
+                      
+                      app = docker.build("130619852016/containertest")
+                }
+            }
+        }
+    stage('Push Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        app.push("${BUILD_NUMBER}")
+                        app.push("latest")
+                    }
+                }
+            }
+        }  
+	stage('Setting Up Selenium Grid') {
          steps{        
             sh "docker network create ${network}"
             sh "docker run -d -p 4444:4444 --name ${seleniumHub} --network ${network} selenium/hub"
             sh "docker run -d -e HUB_PORT_4444_TCP_ADDR=${seleniumHub} -e HUB_PORT_4444_TCP_PORT=4444 --network ${network} --name ${chrome} selenium/node-chrome"
            }
       }
-      stage('Run Test') {
+	 stage('Run Test') {
          steps{
             parallel(
                "suite":{
@@ -30,7 +58,7 @@ pipeline {
             ) 
          }
       }
-      stage('Tearing Down Selenium Grid') {
+	  stage('Tearing Down Selenium Grid') {
           steps {
              //remove all the containers and volumes
              sh "docker rm -vf ${chrome}"
@@ -38,5 +66,6 @@ pipeline {
              sh "docker network rm ${network}"
           }
         }   
+   
    }
 }
