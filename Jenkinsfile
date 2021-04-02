@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                       
-                      app = docker.build("130619852016/containertest")
+                      app = docker.build("vinsdocker/containertest")
                 }
             }
         }
@@ -51,7 +51,7 @@ pipeline {
             parallel(
                "suite":{
                   // a directory 'search' is created for container test-output
-                 sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=testng.xml -v ${WORKSPACE}/suite:/usr/share/tag/test-output  --network ${network} 130619852016/containertest"
+                 sh "docker run --rm -e SELENIUM_HUB=${seleniumHub} -e BROWSER=chrome -e MODULE=testng.xml -v ${WORKSPACE}/suite:/usr/share/tag/test-output  --network ${network} vinsdocker/containertest"
                   //archive all the files under 'search' directory
                   archiveArtifacts artifacts: 'target/**', fingerprint: true
                }      
